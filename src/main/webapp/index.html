@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<meta http-equiv="content-type" content= "text/html; charset=UTF-8"/>
+<head>
+<title>Spring Boot Web Service示例</title>
+</head>
+<body>
+
+<h4>1. 顺序访问P2P图书馆 API:</h4>
+
+step1:
+<ul>
+<li><a href="http://localhost:8080/boot-api/api/books?page=0&size=10">列出第一页图书(每页10项)</a></li>
+<li><a href="http://localhost:8080/boot-api/api/books?page=1&size=2">列出第二页图书(每页2项)</a></li>
+</ul>
+
+step2:
+
+<ul>
+<li><a href="http://localhost:8080/boot-api/api/accounts/login?email=user1@gmail.com&password=springside">登录为User1(注意保存Token)</a></li>
+<li> <a href="http://localhost:8080/boot-api/api/books/3/request?token=replaceme">User1请求借阅User2的书 (手工替换URL中的Token为前一步保存的值)</a></li>
+<li> <a href="http://localhost:8080/boot-api/api/myborrowedbook?token=replaceme">列出User2借阅的图书(替换token)</a></li>
+</ul>
+
+step3:
+
+<ul>
+<li><a href="http://localhost:8080/boot-api/api/accounts/login?email=user2@gmail.com&password=springside">登录为User1</a></li>
+<li><a href="http://localhost:8080/boot-api/api/books/3/confirm?token=replaceme">User2 确认图书借出</a></li>
+<li><a href="http://localhost:8080/boot-api/api/mybook?token=replaceme">列出User2拥有的图书</a></li>
+</ul>
+
+step4:
+
+<ul>
+<li><a href="http://localhost:8080/boot-api/api/books/3/return?token=replaceme">User2 确认图书归还，其他人可以借阅本书</a></li>
+<li><a href="http://localhost:8080/boot-api/api/books/3">列出此书当前状态</a></li>
+</ul>
+
+other flow:
+
+<ul>
+<li><a href="http://localhost:8080/boot-api/api/books/3/cancel?token=replaceme">User1 cancel the apply, replace the token</a></li>
+<li><a href="http://localhost:8080/boot-api/api/books/3/reject?token=replaceme">User2 reject the apply, replace the token</a></li>
+</ul>
+
+
+<h4>2. 在开发Profile下的H2 Console，用于查看内存中数据库的内容:</h4>
+<ul>
+<li><a href="http://localhost:8080/boot-api/h2">http://localhost:8080/boot-api/h2/</a></li>
+</ul>
+</body>
+</html>
